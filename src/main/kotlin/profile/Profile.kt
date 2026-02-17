@@ -14,6 +14,11 @@ fun main() {
             person.gender == Gender.MALE
     })
 
+    filtered = filter(filtered, object : Condition {
+        override fun isSuitable(person: Person): Boolean =
+            person.age < 30
+    })
+
     for (person in filtered) {
         println(person)
     }
