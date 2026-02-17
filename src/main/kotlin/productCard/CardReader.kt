@@ -2,33 +2,29 @@ package productCard
 
 fun main() {
     val cards = CardsRepository.cards
+        .filter { it.productCategory == CardCategory.CLOTHING }
+        .transform { it.copy(productPrice = it.productPrice * 2) }
+        .transform { "${it.productId} - ${it.productName} - ${it.productPrice}" }
 
-    val clothesOnly =
-        filter(cards) { it.productCategory == CardCategory.CLOTHING }
+    for (card in cards) {
+        println(card)
+    }
+}
 
-    val x2clothes =
-        transform(clothesOnly) { it.copy(productPrice = it.productPrice * 2) }
-    val titleStrings =
-        transform(x2clothes)
-        { "${it.productId} - ${it.productName} - ${it.productPrice}"}
+fun <T> List<ProductCard>.transform(transformation: (ProductCard) -> T): List<T> {
+    val result = mutableListOf<T>()
 
-    for (title in titleStrings) {
-        println(title)
+    for (card in this) {
+        result.add(transformation(card))
     }
 
-    println("Total: ${cards.size} items")
-    println("Result: ${x2clothes.size} items")
+    return result.toList()
 }
 
-fun <T> transform(cardSet: List<ProductCard>, transformation: (ProductCard) -> T): List<T> {
-    return cardSet
-        .map { transformation(it) }
-}
-
-fun filter(cardSet: List<ProductCard>, isSuitable: (ProductCard) -> Boolean): List<ProductCard> {
+fun List<ProductCard>.filter(isSuitable: (ProductCard) -> Boolean): List<ProductCard> {
     val result = mutableListOf<ProductCard>()
 
-    for (card in cardSet) {
+    for (card in this) {
         if (isSuitable(card)) {
             result.add(card)
         }
