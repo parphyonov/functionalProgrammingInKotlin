@@ -1,5 +1,5 @@
 package profile
 
-class ConditionMales: Condition {
+object ConditionMales: Condition {
     override fun isSuitable(person: Person): Boolean = person.gender == Gender.MALE
 }

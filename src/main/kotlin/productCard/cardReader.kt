@@ -4,6 +4,7 @@ fun main() {
     val cards = CardsRepository.cards
     var filtered = filter(cards, ConditionPriceAbove500())
     filtered = filter(filtered, ConditionCategorySport())
+    filtered = filter(filtered, ConditionRatingHigh())
 
     println("Total: ${cards.size} items")
     println("Filtered: ${filtered.size} items")
