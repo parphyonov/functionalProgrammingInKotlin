@@ -6,28 +6,10 @@ fun main() {
         .filter { it.age < 30 }
         .filter { it.firstName.startsWith("A") }
         .filter { it.gender == Gender.MALE }
-        .transform { it.copy(age = it.age + 1) }
+        .toSet()
+        .map { it.copy(age = it.age + 1) }
+        .map { it.firstName }
 
     for (profile in profiles)
-        println("$profile")
-}
-
-fun <R> List<Person>.transform(transformation: (Person) -> R): List<R> {
-    val result = mutableListOf<R>()
-    for (person in this) {
-        result.add(transformation(person))
-    }
-    return result.toList()
-}
-
-fun List<Person>.filter(isSuitable: (Person) -> Boolean): List<Person> {
-    val result = mutableListOf<Person>()
-
-    for (person in this) {
-        if (isSuitable(person)) {
-            result.add(person)
-        }
-    }
-
-    return result.toList()
+        println(profile)
 }
