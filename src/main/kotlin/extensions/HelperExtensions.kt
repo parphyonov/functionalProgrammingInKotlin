@@ -1,5 +1,9 @@
 package extensions
 
+inline fun <T> Iterable<T>.forEach(action: (T) -> Unit) {
+    for (element in this) action(element)
+}
+
 inline fun <T, R> Iterable<T>.transform(transform: (T) -> R): List<R> {
     val result = mutableListOf<R>()
     for (person in this) {
