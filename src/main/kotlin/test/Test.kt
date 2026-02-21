@@ -1,9 +1,16 @@
 package test
 
+var age: Int? = null
+
 fun main() {
-    val a = readln().toInt()
+    val result = age?.let {
+        if (it >= 18) {
+            "Adult"
+        } else {
+            val diff = 18 - it
+            "$diff before adult"
+        }
+    }
 
-    println(a.isPositive())
+    result?.let { println(it) }
 }
-
-fun Int.isPositive(): Boolean = this > 0

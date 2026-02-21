@@ -1,5 +1,9 @@
 package extensions
 
+inline fun <T, R> T.myLet(block: (T) -> R): R {
+    return block(this)
+}
+
 inline fun <T> Iterable<T>.forEach(action: (T) -> Unit) {
     for (element in this) action(element)
 }
