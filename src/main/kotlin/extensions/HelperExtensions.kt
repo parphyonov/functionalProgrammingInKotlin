@@ -1,5 +1,10 @@
 package extensions
 
+inline fun <T> T.myAlso(block: (T) -> Unit): T {
+    block(this)
+    return this
+}
+
 inline fun <T, R> T.myLet(block: (T) -> R): R {
     return block(this)
 }
